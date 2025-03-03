@@ -1,0 +1,19 @@
+{
+    "name": "kodiak-interact",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "typechain": "typechain --target ethers-v6 src/abi/*.json --out-dir src/typechain-types"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@typechain/ethers-v6": "^0.5.1",
+        "ethers": "^6.13.5",
+        "ts-node": "^10.9.2",
+        "typechain": "^8.3.2",
+        "typescript": "^5.8.2"
+    }
+}
