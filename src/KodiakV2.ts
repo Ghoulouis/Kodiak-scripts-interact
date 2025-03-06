@@ -23,10 +23,7 @@ async function main() {
 
     const amountIn = ethers.parseUnits("1", 18);
 
-    const path = ethers.AbiCoder.defaultAbiCoder().encode(
-        ["address", "uint24", "address"],
-        [usdeAddress, poolfee, honeyAddress]
-    );
+    const path = ethers.solidityPacked(["address", "uint24", "address"], [usdeAddress, poolfee, honeyAddress]);
 
     try {
         const quote = await quoteV3Mix.quoteExactInputSingleV2({
@@ -52,25 +49,25 @@ async function main() {
 
     let balanceUSDe = await usde.balanceOf(wallet.address);
     console.log("balanceUSDe", balanceUSDe.toString());
+    let txResponse, txReceipt;
+    // try {
+    //     //   const txResponse = await usde.connect(wallet).approve(await routerV3.getAddress(), MaxUint256);
+    //     // const txReceipt = await txResponse.wait();
+    //     txResponse = await routerV3.connect(wallet).exactInputSingle({
+    //         tokenIn: usdeAddress,
+    //         tokenOut: honeyAddress,
+    //         fee: poolfee,
+    //         recipient: wallet.address,
+    //         //@ts-ignore
+    //         deadline: BigInt(Math.floor(Date.now() / 1000) + 60),
+    //         amountIn: balanceUSDe,
+    //         amountOutMinimum: 0,
+    //         sqrtPriceLimitX96: 0,
+    //     });
 
-    try {
-        //   const txResponse = await usde.connect(wallet).approve(await routerV3.getAddress(), MaxUint256);
-
-        // const txReceipt = await txResponse.wait();
-
-        const tx = await routerV3.connect(wallet).exactInputSingle.staticCallResult({
-            tokenIn: usdeAddress,
-            tokenOut: honeyAddress,
-            fee: poolfee,
-            recipient: wallet.address,
-            //@ts-ignore
-            deadline: BigInt(Math.floor(Date.now() / 1000) + 60),
-            amountIn: balanceUSDe,
-            amountOutMinimum: 0,
-            sqrtPriceLimitX96: 0,
-        });
-    } catch (e) {
-        console.log("error", e);
-    }
+    //     txReceipt = await txResponse.wait();
+    // } catch (e) {
+    //     console.log("error", e);
+    // }
 }
 main();
