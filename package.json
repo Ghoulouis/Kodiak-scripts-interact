@@ -11,6 +11,7 @@
     "license": "ISC",
     "dependencies": {
         "@typechain/ethers-v6": "^0.5.1",
+        "dotenv": "^16.4.7",
         "ethers": "^6.13.5",
         "ts-node": "^10.9.2",
         "typechain": "^8.3.2",
